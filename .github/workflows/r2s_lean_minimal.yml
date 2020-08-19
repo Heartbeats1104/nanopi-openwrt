@@ -14,7 +14,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    if: github.repository == 'klever1988/nanopi-openwrt'
+    if: github.repository == 'Heartbeats1104/nanopi-openwrt'
 
     steps:
 
@@ -58,55 +58,54 @@ jobs:
           cat configs/config_rk3328 | grep "TARGET" >> ../base_rk3328.seed
           cat ../base_rk3328.seed > configs/config_rk3328
           echo '
-          CONFIG_PACKAGE_ipv6helper=y
-          CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
+          CONFIG_PACKAGE_ipv6helper=n
+          CONFIG_PACKAGE_dnsmasq_full=y
           CONFIG_OPENSSL_ENGINE_BUILTIN=y
           CONFIG_OPENSSL_WITH_DTLS=y
           CONFIG_OPENSSL_WITH_EC2M=y
           CONFIG_OPENSSL_WITH_NPN=y
           CONFIG_PACKAGE_autocore=y
-          CONFIG_PACKAGE_htop=y
+          CONFIG_PACKAGE_htop=n
           CONFIG_PACKAGE_diffutils=y
           CONFIG_PACKAGE_vim-fuller=y
           CONFIG_PACKAGE_pv=y
           CONFIG_PACKAGE_pigz=y
           CONFIG_PACKAGE_unzip=y
           CONFIG_PACKAGE_losetup=y
-          CONFIG_PACKAGE_luci-app-frpc=y
-          CONFIG_PACKAGE_luci-app-netdata=y
+          CONFIG_PACKAGE_luci-app-frpc=n
+          CONFIG_PACKAGE_luci-app-netdata=n
           CONFIG_LIBSODIUM_MINIMAL=y
-          CONFIG_PACKAGE_ddns-scripts_aliyun=y
-          CONFIG_PACKAGE_ddns-scripts_cloudflare.com-v4=y
-          CONFIG_PACKAGE_luci-app-ssr-plus=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_obfs=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
-          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
-          CONFIG_PACKAGE_luci-app-ssrserver-python=y
+          CONFIG_PACKAGE_ddns-scripts_aliyun=n
+          CONFIG_PACKAGE_ddns-scripts_cloudflare.com-v4=n
+          CONFIG_PACKAGE_luci-app-ssr-plus=n
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=n
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_DNS2SOCKS=n
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=n
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=n
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_obfs=n
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=n
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=n
+          CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=n
+          CONFIG_PACKAGE_luci-app-ssrserver-python=n
           CONFIG_PACKAGE_luci-app-uhttpd=y
           CONFIG_PACKAGE_luci-app-unblockmusic=y
-          CONFIG_PACKAGE_luci-app-v2ray-server=y
-          CONFIG_PACKAGE_luci-app-vssr=y
-          CONFIG_PACKAGE_luci-theme-argon=y
-          CONFIG_PACKAGE_luci-theme-material=y
-          CONFIG_PACKAGE_luci-theme-netgear=y
-          CONFIG_PACKAGE_luci-app-unblockmusic=y
+          CONFIG_PACKAGE_luci-app-v2ray-server=n
+          CONFIG_PACKAGE_luci-app-vssr=n
+          CONFIG_PACKAGE_luci-theme-argon=n
+          CONFIG_PACKAGE_luci-theme-material=n
+          CONFIG_PACKAGE_luci-theme-netgear=n
           CONFIG_PACKAGE_kmod-rtl8xxxu=y
-          CONFIG_UnblockNeteaseMusic_Go=y
+          CONFIG_UnblockNeteaseMusic_Go=n
           CONFIG_UnblockNeteaseMusic_NodeJS=y
           CONFIG_PACKAGE_luci-app-passwall=y
-          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook=y
-          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook=n
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=n
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan=y
           CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y
-          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y
-          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y
-          CONFIG_PACKAGE_luci-app-openclash=y
-          CONFIG_PACKAGE_luci-app-zerotier=y
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=n
+          CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=n
+          CONFIG_PACKAGE_luci-app-openclash=n
+          CONFIG_PACKAGE_luci-app-zerotier=n
           # CONFIG_PACKAGE_luci-app-accesscontrol is not set
           # CONFIG_PACKAGE_luci-app-nlbwmon is not set
           # CONFIG_PACKAGE_nlbwmon is not set
@@ -125,8 +124,8 @@ jobs:
           # CONFIG_PACKAGE_libopenssl-devcrypto is not set
           # CONFIG_V2RAY_COMPRESS_UPX is not set
           CONFIG_PACKAGE_luci-app-oled=y
-          CONFIG_PACKAGE_luci-app-flowoffload=y
-          # CONFIG_PACKAGE_luci-app-sfe is not set
+          # CONFIG_PACKAGE_luci-app-flowoffload=n
+          # CONFIG_PACKAGE_luci-app-sfe=y
           ' >> configs/config_rk3328
           cd friendlywrt
           git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
@@ -170,15 +169,6 @@ jobs:
           mv ../../scripts/check_wan4.sh package/base-files/files/usr/bin && sed -i '/exit/i\/bin/sh /usr/bin/check_wan4.sh &' package/base-files/files/etc/rc.local
           mv ../../scripts/autoupdate.sh package/base-files/files/root/au.sh && chmod +x package/base-files/files/root/au.sh
           echo -e '\nDYC Build\n' >> package/base-files/files/etc/banner
-
-      - name: Add OpenClash
-        run: |
-          git clone -b master https://github.com/vernesong/OpenClash.git 
-          mv OpenClash/luci-app-openclash friendlywrt-rk3328/friendlywrt/package
-          cd friendlywrt-rk3328/friendlywrt/package/base-files/files
-          mkdir -p etc/openclash/core && cd etc/openclash/core
-          curl -L https://github.com/vernesong/OpenClash/releases/download/Clash/clash-linux-armv8.tar.gz | tar zxf -
-          chmod +x clash
 
       - name: Add Passwall
         run: |
